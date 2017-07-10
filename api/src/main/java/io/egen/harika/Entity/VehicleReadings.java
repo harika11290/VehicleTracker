@@ -3,85 +3,71 @@ package io.egen.harika.Entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
+
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "VehicleDetails.findAll",
+        @NamedQuery(name = "VehicleReadings.findAll",
                 query = "SELECT vReadings FROM VehicleReadings vReadings"),
-        @NamedQuery(name = "VehicleDetails.findByVIN",
-                query = "SELECT vReadings FROM VehicleReadings vReadings WHERE vReadings.vIN=:vIN")
+        @NamedQuery(name = "VehicleReadings.findByVIN",
+                query = "SELECT vReadings FROM VehicleReadings vReadings WHERE vReadings.vin=:Vin")
 })
 public class VehicleReadings {
     @Id
-    @Column(columnDefinition = "varchar(36)")
-    private String vIN;
-    private String latitute;
-    private String longitude;
-    private Date timeStamp;
-    private int fuelVolume;
-    private int speed;
-    private int engineHp;
+    private String vReadingId;
+    private String vin;
+    private Double latitude;
+    private Double longitude;
+    private Date timestamp;
+    private float fuelVolume;
+    private float speed;
+    private float engineHp;
     private boolean engineLightsOn;
     private boolean engineCoolentLow;
     private boolean cruiseControlOn;
-    private int engineRpm;
+    private float engineRpm;
+    @OneToOne(cascade={CascadeType.ALL})
     private Tires tires;
-
-    public String getvIN() {
-        return vIN;
+    public VehicleReadings() {
+        this.vReadingId = UUID.randomUUID()
+                .toString();
     }
 
-    public void setvIN(String vIN) {
-        this.vIN = vIN;
+    public String getvReadingId() {
+        return vReadingId;
     }
 
-    public String getLatitute() {
-        return latitute;
+    public void setvReadingId(String vReadingId) {
+        this.vReadingId = vReadingId;
     }
 
-    public void setLatitute(String latitute) {
-        this.latitute = latitute;
-    }
+    public String getVin() {
+		return vin;
+	}
 
-    public String getLongitude() {
-        return longitude;
-    }
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
+ 
+    public Date getTimestamp() {
+		return timestamp;
+	}
 
-    public Date getTimeStamp() {
-        return timeStamp;
-    }
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
 
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
-    }
+	public float getFuelVolume() {
+		return fuelVolume;
+	}
 
-    public int getFuelVolume() {
-        return fuelVolume;
-    }
+	public void setFuelVolume(float fuelVolume) {
+		this.fuelVolume = fuelVolume;
+	}
 
-    public void setFuelVolume(int fuelVolume) {
-        this.fuelVolume = fuelVolume;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getEngineHp() {
-        return engineHp;
-    }
-
-    public void setEngineHp(int engineHp) {
-        this.engineHp = engineHp;
-    }
-
+	
+   
     public boolean isEngineLightsOn() {
         return engineLightsOn;
     }
@@ -106,19 +92,71 @@ public class VehicleReadings {
         this.cruiseControlOn = cruiseControlOn;
     }
 
-    public int getEngineRpm() {
-        return engineRpm;
-    }
+    public Double getLatitude() {
+		return latitude;
+	}
 
-    public void setEngineRpm(int engineRpm) {
-        this.engineRpm = engineRpm;
-    }
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
 
-    public Tires getTires() {
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public float getEngineHp() {
+		return engineHp;
+	}
+
+	public void setEngineHp(float engineHp) {
+		this.engineHp = engineHp;
+	}
+
+	public float getEngineRpm() {
+		return engineRpm;
+	}
+
+	public void setEngineRpm(float engineRpm) {
+		this.engineRpm = engineRpm;
+	}
+
+	public Tires getTires() {
         return tires;
     }
 
     public void setTires(Tires tires) {
         this.tires = tires;
+    }
+
+
+    @Override
+    public String toString() {
+        return "VehicleReadings{" +
+                "vReadingId='" + vReadingId + '\'' +
+                ", vin='" + vin + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", timestamp=" + timestamp +
+                ", fuelVolume=" + fuelVolume +
+                ", speed=" + speed +
+                ", engineHp=" + engineHp +
+                ", engineLightsOn=" + engineLightsOn +
+                ", engineCoolentLow=" + engineCoolentLow +
+                ", cruiseControlOn=" + cruiseControlOn +
+                ", engineRpm=" + engineRpm +
+                ", tires=" + tires +
+                '}';
     }
 }

@@ -12,23 +12,23 @@ import java.util.List;
 public class VehicleDetailsRepositoryImpl implements VehicleDetailsRepository {
     @PersistenceContext
     private EntityManager em;
-    @Override
+    
     public List<VehicleDetails> findAllVehicles() {
         TypedQuery<VehicleDetails> query = em.createNamedQuery("VehicleDetails.findAll", VehicleDetails.class);
         return query.getResultList();
     }
 
-    @Override
+    
     public VehicleDetails findVehicle(String vin) {
         return em.find(VehicleDetails.class,vin);
     }
 
-    @Override
-    public VehicleDetails findVehicleByVIN(String vin) {
+    
+    public VehicleDetails checkIfVehicleExists(String vin) {
+    	
         TypedQuery<VehicleDetails> query = em.createNamedQuery("VehicleDetails.findByVIN", VehicleDetails.class);
-        query.setParameter("vIN", vin);
+        query.setParameter("Vin", vin);
         List<VehicleDetails> resultList = query.getResultList();
-
         if (resultList != null && resultList.size() == 1) {
             return resultList.get(0);
         } else {
@@ -36,19 +36,29 @@ public class VehicleDetailsRepositoryImpl implements VehicleDetailsRepository {
         }
     }
 
-    @Override
-    public VehicleDetails addVehicleDetails(VehicleDetails vehicleDetails) {
-        em.persist(vehicleDetails);
+    
+    public List<VehicleDetails> addVehicleDetails(List<VehicleDetails> vehicleDetails) {
+    	VehicleDetails vDetails = new VehicleDetails();
+    	for(int i=0;i<vehicleDetails.size();i++ ){
+    		vDetails = vehicleDetails.get(i);
+    		em.persist(vDetails);
+    	}
         return vehicleDetails;
     }
 
-    @Override
-    public VehicleDetails updateVehicleDetails(VehicleDetails vehicleDetails) {
-       return em.merge(vehicleDetails);
+    
+    public List<VehicleDetails> updateVehicleDetails(List<VehicleDetails> vehicleDetails) {
+    	VehicleDetails vDetails = new VehicleDetails();
+    	for(int i=0;i<vehicleDetails.size();i++ ){
+    		vDetails = vehicleDetails.get(i);
+             em.merge(vDetails);
+    	}
+        return vehicleDetails;
     }
 
-    @Override
+    
     public void deleteDetails(VehicleDetails vehicleDetails) {
+
         em.remove(vehicleDetails);
     }
 }

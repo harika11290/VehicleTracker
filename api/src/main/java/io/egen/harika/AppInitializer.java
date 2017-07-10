@@ -2,6 +2,7 @@ package io.egen.harika;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 /**
  * Created by ReddyHarika on 5/30/2017.
  */
@@ -19,6 +20,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/api/**/*"};
+        return new String[]{"/api/*"};
     }
 }

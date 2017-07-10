@@ -1,11 +1,34 @@
 package io.egen.harika.Entity;
 
 
+
+import javax.persistence.*;
+import java.util.UUID;
+
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Tires.findAll",
+                query = "SELECT tires FROM Tires tires"),
+})
 public class Tires {
+    @Id
+    @Column(columnDefinition = "varchar(36)")
+    private String tiresId;
     private int frontLeft;
     private int frontRight;
     private int rearLeft;
     private int rearRight;
+
+    public Tires(){
+        this.tiresId = UUID.randomUUID().toString();
+    }
+    public String getTiresId() {
+        return tiresId;
+    }
+
+    public void setTiresId(String tiresId) {
+        this.tiresId = tiresId;
+    }
 
     public int getFrontLeft() {
         return frontLeft;

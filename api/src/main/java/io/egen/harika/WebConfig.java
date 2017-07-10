@@ -14,8 +14,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addMapping("/api/**/*")
                 .allowedOrigins("http://mocker.egen.io/")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("header1", "header2", "header3")
+                .allowedHeaders("Access-Control-Allow-Origin:*", "header2", "header3")
                 .exposedHeaders("header1", "header2")
                 .allowCredentials(false).maxAge(3600);
+        		
     }
 }

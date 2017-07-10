@@ -9,34 +9,33 @@ import java.util.Date;
         @NamedQuery(name = "VehicleDetails.findAll",
                 query = "SELECT vDetails FROM VehicleDetails vDetails"),
         @NamedQuery(name = "VehicleDetails.findByVIN",
-                query = "SELECT vDetails FROM VehicleDetails vDetails WHERE vDetails.vIN=:vIN")
+                query = "SELECT vDetails FROM VehicleDetails vDetails WHERE vDetails.vin=:Vin")
 })
 public class VehicleDetails {
     @Id
     @Column(columnDefinition = "varchar(36)", unique = true)
     private String vin;
-
-    private String brand;
+    private String make;
     private String model;
     private int year;
     private int redlineRpm;
     private int maxFuelVolume;
     private Date lastServiceDate;
 
-    public String getvin() {
+    public String getVin() {
         return vin;
     }
 
-    public void setvin(String vin) {
+    public void setVin(String vin) {
         this.vin = vin;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getMake() {
+        return make;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setMake(String make) {
+        this.make = make;
     }
 
     public String getModel() {
@@ -45,14 +44,6 @@ public class VehicleDetails {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public String getVin() {
-        return vin;
-    }
-
-    public void setVin(String vin) {
-        this.vin = vin;
     }
 
     public int getYear() {
@@ -91,11 +82,11 @@ public class VehicleDetails {
     public String toString() {
         return "VehicleDetails{" +
                 "vin='" + vin + '\'' +
-                ", brand='" + brand + '\'' +
+                ", make='" + make + '\'' +
                 ", model='" + model + '\'' +
-                ", year='" + year + '\'' +
-                ", redlineRpm='" + redlineRpm + '\'' +
-                ", maxFuelVolume='" + maxFuelVolume + '\'' +
+                ", year=" + year +
+                ", redlineRpm=" + redlineRpm +
+                ", maxFuelVolume=" + maxFuelVolume +
                 ", lastServiceDate=" + lastServiceDate +
                 '}';
     }

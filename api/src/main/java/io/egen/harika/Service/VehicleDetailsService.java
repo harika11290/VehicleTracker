@@ -7,7 +7,7 @@ import java.util.List;
 public interface VehicleDetailsService {
     List<VehicleDetails> findAllVehicles();
     VehicleDetails findVehicle(String vin);
-    VehicleDetails addVehicleDetails(VehicleDetails vehicleDetails);
-    VehicleDetails updateVehicleDetails(String vin, VehicleDetails vehicleDetails);
+    List<VehicleDetails> addVehicleDetails(List<VehicleDetails> vehicleDetails);
+    List<VehicleDetails> updateVehicleDetails(List<VehicleDetails> vehicleDetails);
     void deleteDetails(String vin);
 }

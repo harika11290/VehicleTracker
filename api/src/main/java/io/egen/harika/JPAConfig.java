@@ -26,12 +26,12 @@ public class JPAConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean emf() {
-        LocalContainerEntityManagerFactoryBean emfBean = new LocalContainerEntityManagerFactoryBean();
-        emfBean.setDataSource(dataSource());
-        emfBean.setPackagesToScan("io.egen.harika.entity");
-        emfBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        emfBean.setJpaProperties(jpaProperties());
-        return emfBean;
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(dataSource());
+        emf.setPackagesToScan("io.egen.harika.Entity");
+        emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        emf.setJpaProperties(jpaProperties());
+        return emf;
     }
 
     @Bean

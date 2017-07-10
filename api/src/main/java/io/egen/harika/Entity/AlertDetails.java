@@ -1,13 +1,42 @@
 package io.egen.harika.Entity;
 
+import java.util.Date;
+import java.util.UUID;
+
+import javax.persistence.*;
 
 
+@Entity
+@NamedQueries({
+    @NamedQuery(name = "AlertDetails.findAll",
+            query = "SELECT alertDetails FROM AlertDetails alertDetails order by alertDetails.alertCreationDate desc"),
+    @NamedQuery(name = "AlertDetails.findbyVin",
+    query = "SELECT alertDetails FROM AlertDetails alertDetails where alertDetails.vin=:alertVin order by alertDetails.alertCreationDate desc ")
+})
 public class AlertDetails {
+	@Id
+	@Column(columnDefinition="varchar(36)")
+	private String alertId;
     private String vin;
     private String priority;
-    private VehicleReadings vehicleReadings;
+    private String alertType;
+    private Date alertCreationDate;
+    private String message;
+    
 
-    public String getVin() {
+    public String getAlertId() {
+		return alertId;
+	}
+
+	public void setAlertId(String alertId) {
+		this.alertId = alertId;
+	}
+
+	public AlertDetails(){
+		this.alertId = UUID.randomUUID().toString();
+	}
+	
+	public String getVin() {
         return vin;
     }
 
@@ -15,16 +44,31 @@ public class AlertDetails {
         this.vin = vin;
     }
 
-    public VehicleReadings getVehicleReadings() {
-        return vehicleReadings;
-    }
+    public String getAlertType() {
+		return alertType;
+	}
 
-    public void setVehicleReadings(VehicleReadings vehicleReadings) {
-        this.vehicleReadings = vehicleReadings;
-    }
+	public void setAlertType(String alertType) {
+		this.alertType = alertType;
+	}
 
+	public Date getAlertCreationDate() {
+		return alertCreationDate;
+	}
 
-    public String getPriority() {
+	public void setAlertCreationDate(Date alertCreationDate) {
+		this.alertCreationDate = alertCreationDate;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+	
+    public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getPriority() {
         return priority;
     }
 

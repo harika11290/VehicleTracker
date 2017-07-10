@@ -15,14 +15,14 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 
     @Autowired
     private VehicleDetailsRepository vDetailsRepository;
-    @Override
+    
     @Transactional(readOnly = true)
     public List<VehicleDetails> findAllVehicles() {
 
         return vDetailsRepository.findAllVehicles();
     }
 
-    @Override
+    
     @Transactional(readOnly = true)
     public VehicleDetails findVehicle(String vin) {
         VehicleDetails vh= vDetailsRepository.findVehicle(vin);
@@ -32,28 +32,31 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
         return vh;
     }
 
-    @Override
+    
     @Transactional
-    public VehicleDetails addVehicleDetails(VehicleDetails vehicleDetails) {
-        VehicleDetails vd = vDetailsRepository.findVehicleByVIN(vehicleDetails.getvin());
+    public List<VehicleDetails> addVehicleDetails(List<VehicleDetails> vehicleDetails) {
+    	
+    	VehicleDetails vDetails = new VehicleDetails();
+    	for(int i=0; i< vehicleDetails.size();i++){
+    		vDetails=vehicleDetails.get(i);
+    		
+        VehicleDetails vd = vDetailsRepository.checkIfVehicleExists(vDetails.getVin());
         if(vd != null){
-            throw new BadRequestException("Vehicle with VIN "+vehicleDetails.getvin()+" already exists");
+        	vehicleDetails.remove(i);
+            throw new BadRequestException("Vehicle with VIN "+vDetails.getVin()+" already exists");
         }
+    	}
         return vDetailsRepository.addVehicleDetails(vehicleDetails);
     }
 
-    @Override
+    
     @Transactional
-    public VehicleDetails updateVehicleDetails(String vin, VehicleDetails vehicleDetails) {
+    public List<VehicleDetails> updateVehicleDetails(List<VehicleDetails> vehicleDetails) {
 
-        VehicleDetails vd = vDetailsRepository.findVehicle(vin);
-        if(vd == null){
-            throw new NotFoundException("Vehicle with VIN "+vin+" Not Found");
-        }
         return vDetailsRepository.updateVehicleDetails(vehicleDetails);
     }
 
-    @Override
+    
     @Transactional
     public void deleteDetails(String vin) {
         VehicleDetails vd = vDetailsRepository.findVehicle(vin);

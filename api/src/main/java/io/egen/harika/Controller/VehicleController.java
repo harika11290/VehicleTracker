@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.mysql.cj.xdevapi.JsonArray;
+
 import java.util.List;
 
+@CrossOrigin(origins = "http://mocker.egen.io", maxAge = 3600)
 @RestController
-@RequestMapping(value = "/vehicleDetails")
+@RequestMapping(value = "vehicleDetails")
 public class VehicleController {
 
     @Autowired
@@ -19,25 +23,26 @@ public class VehicleController {
     public List<VehicleDetails> findAllVehicles(){
         return vehicleDetailsService.findAllVehicles();
     }
-    @RequestMapping(method = RequestMethod.GET,value = "{VIN}",
+    @RequestMapping(method = RequestMethod.GET,value = "{vin}",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public VehicleDetails findVehicle(@PathVariable("VIN") String vin){
+    public VehicleDetails findVehicle(@PathVariable("vin") String vin){
         return vehicleDetailsService.findVehicle(vin);
     }
     @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public VehicleDetails addVehicleDetails(@RequestBody VehicleDetails vehicleDetails){
+    public List<VehicleDetails> addVehicleDetails(@RequestBody List<VehicleDetails> vehicleDetails){
         return vehicleDetailsService.addVehicleDetails(vehicleDetails);
     }
-    @RequestMapping(method = RequestMethod.PUT, value = "{VIN}",
+    @RequestMapping(method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public VehicleDetails updateDetails(@PathVariable("VIN") String vin, @RequestBody VehicleDetails vehicleDetails){
-        return vehicleDetailsService.updateVehicleDetails(vin,vehicleDetails);
+    public List<VehicleDetails> updateDetails(@RequestBody List<VehicleDetails> vehicleDetails){
+    	 return vehicleDetailsService.updateVehicleDetails(vehicleDetails);
+   
     }
-@RequestMapping(method = RequestMethod.DELETE, value = "{VIN}")
-    public void deleteDetails(@PathVariable("VIN") String vin){
+@RequestMapping(method = RequestMethod.DELETE, value = "{vin}")
+    public void deleteDetails(@PathVariable("vin") String vin){
         vehicleDetailsService.deleteDetails(vin);
     }
 }
