@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+<head>
+  <meta charset="utf-8" />
+  <title>AngularJS Plunker</title>
+  <script>
+    document.write('<base href="' + document.location + '" />');
+  </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">Car Tracker</a>
+  </div>
+  <ul class="nav nav-tabs">
+    <li><a href="#!/vehicleDetails">Vehicle Details</a></li>
+    <li><a href="#!/vehicleReadings">Vehicle Readings</a></li>
+    <li><a href="#!/vehicleAlerts">Vehicle Alerts</a></li>
+    <li><a href="#!/vehicleHAlerts">Vehicle HIGH Alerts</a></li>
+  </ul>
+</div>
+</nav>
+  <div class="container">
+    <div ng-view>
+
+    </div>
+
+  </div>
+
+  <script src="https://code.angularjs.org/1.6.4/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.6.4/angular-route.min.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+  <script src="app.module.js"></script>
+  <script src="vehicle-details.service.js"></script>
+  <script src="vehicle-details/vehicle-details.controller.js"></script>
+  <script src="vehicle-alerts/vehicle-alerts.controller.js"></script>
+  <script src="vehicle-alerts/vehicle-high-alerts.controller.js"></script>
+  <script src="vehicle-readings/vehicle-readings.controller.js"></script>
+  <script src="vehicle-readings/vehicle-readingsby-id.controller.js"></script>
+  <script src="utils/dirPagination.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+
+</body>
+
+</html>

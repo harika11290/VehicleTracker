@@ -1,0 +1,26 @@
+<h4>Vehicle Details</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>VIN</th>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Year</th>
+      <th>ReadLine RPM</th>
+      <th>Max Fuel Volume</th>
+      <th>Last Service Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="vDetails in vDetailsVm.vehicleDetails">
+      <td>{{vDetails.vin}}</td>
+      <td>{{vDetails.make}}</td>
+      <td>{{vDetails.model}}</td>
+      <td>{{vDetails.year}}</td>
+      <td>{{vDetails.redlineRpm}}</td>
+      <td>{{vDetails.maxFuelVolume}}</td>
+      <td>{{vDetails.lastServiceDate | date: medium}}</td>
+    </tr>
+  </tbody>
+</table>

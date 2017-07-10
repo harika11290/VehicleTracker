@@ -1,0 +1,51 @@
+<h4>Vehicle Readings</h4>
+<div class="search-control">
+
+  <div class="search-bar">Search:
+    <input type="search" ng-model="vReadingsVm.searchText.vin" placeholder="Search vehicle using vin..." class="form-control">
+  </div>
+
+  <div class="search-bar">Select Time (Mins):
+    <select class="form-control" ng-model="vReadingsVm.selectedTime" ng-options="x for x in vReadingsVm.options" ng-change="vReadingsVm.getSelectedTime(vReadingsVm.vehicleReadings)">
+    </select>
+  </div>
+  
+  <div class="search-bar">Select Signal:
+    <select class="form-control" ng-model="vReadingsVm.selectedSignal" ng-options="x for x in vReadingsVm.selectSignal" ng-change="vReadingsVm.getSelectedTime(vReadingsVm.vehicleReadings)">
+    </select>
+  </div>
+  
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>VIN</th>
+      <th>TimeStamp</th>
+      <th>Speed</th>
+      <th>Engine Hp</th>
+      <th>Engine Rpm</th>
+      <th>Fuel Volume</th>
+      <th>Front-Left tire </th>
+      <th>Front-Right tire </th>
+      <th>Rear-Left tire </th>
+      <th>Rear-Right tire </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr dir-paginate="vReadings in vReadingsVm.displayAlerts|itemsPerPage:20|filter:vReadingsVm.searchText.vin">
+      <td><a ng-href="#!/vehicleReadings/{{vReadings.vin}}">{{vReadings.vin}}</a></td>
+      <td>{{vReadings.timestamp| date: "MMM/dd/yyyy 'at' h:mm:ss"}}</td>
+      <td>{{vReadings.speed}}</td>
+      <td>{{vReadings.engineHp}}</td>
+      <td>{{vReadings.engineRpm}}</td>
+      <td>{{vReadings.fuelVolume}}</td>
+      <td>{{vReadings.tires.frontLeft}}</td>
+      <td>{{vReadings.tires.frontRight}}</td>
+      <td>{{vReadings.tires.rearLeft}}</td>
+      <td>{{vReadings.tires.rearRight}}</td>
+    </tr>
+  </tbody>
+</table>
+<dir-pagination-controls max-size="10" direction-links="true" boundary-links="true">
+</dir-pagination-controls>

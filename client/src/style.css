@@ -1,0 +1,37 @@
+/* Styles go here */
+
+table{
+  border: 1px solid #D8D8D8;
+  font: Helvetica, sans-serif;
+}
+
+table th{
+  color: #08298A;
+}
+h2{
+  color: #08298A;
+
+}
+h4{
+  color: #08298A;
+  
+}
+
+.navbar-default .navbar-brand{
+  font-weight: bold;
+  color: #08298A;
+}
+.nav-tabs>li> a{
+  color: #08298A;
+}
+
+.search-control{
+  width: 680px; 
+  padding: 10px;
+}
+
+.search-bar{
+  float: left;
+  padding: 10px;
+  width: 200px;
+}

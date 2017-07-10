@@ -1,0 +1,33 @@
+<h4>Vehicles High Alerts (past 2 hrs)</h4>
+
+<div class="search-control">
+        
+  <div class="search-bar">Search: <input type="search" ng-model="vAlertsVm.searchText.vin" placeholder="Search vechicle using vin..." class="form-control"></div>
+
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>VIN</th>
+      <th>Priority</th>
+      <th>Alert Type</th>
+      <th>Alert Creation Date</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr dir-paginate="vHAlerts in vHAlertsVm.vehicleAlerts|itemsPerPage:10|filter:vAlertsVm.searchText.vin|filter:'HIGH' ">
+      <td><a ng-href="#!/vehicleAlerts/{{vHAlerts.vin}}">{{vHAlerts.vin}}</a></td>
+      <td>{{vHAlerts.priority}}</td>
+      <td>{{vHAlerts.alertType}}</td>
+      <td>{{vHAlerts.alertCreationDate| date: "MMM/dd/yyyy 'at' h:mm:ss"}}</td>
+      <td>{{vHAlerts.message}}</td>
+    </tr>
+  </tbody>
+</table>
+<dir-pagination-controls
+       max-size="10"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>

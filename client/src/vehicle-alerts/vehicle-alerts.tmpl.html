@@ -1,0 +1,36 @@
+<h4>Vehicles Alerts</h4>
+<div class="search-control">
+
+  <div class="search-bar">Search:
+    <input type="search" ng-model="vAlertsVm.searchText.vin" placeholder="Search vechicle using vin..." class="form-control">
+  </div>
+
+  <div class="search-bar">Select Time (Mins):
+    <select class="form-control" ng-model="vAlertsVm.selectedTime" ng-options="x for x in vAlertsVm.options" ng-change="vAlertsVm.getSelectedTime(vAlertsVm.vehicleAlerts)">
+    </select>
+  </div>
+  
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>VIN</th>
+      <th>Priority</th>
+      <th>Alert Type</th>
+      <th>Alert Creation Date</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr dir-paginate="vAlerts in vAlertsVm.displayAlerts|itemsPerPage:10|filter:vAlertsVm.searchText.vin">
+      <td><a ng-href="#!/vehicleAlerts/{{vAlerts.vin}}">{{vAlerts.vin}}</a></td>
+      <td>{{vAlerts.priority}}</td>
+      <td>{{vAlerts.alertType}}</td>
+      <td>{{vAlerts.alertCreationDate| date: "MMM/dd/yyyy 'at' h:mm:ss"}}</td>
+      <td>{{vAlerts.message}}</td>
+    </tr>
+  </tbody>
+</table>
+<dir-pagination-controls max-size="10" direction-links="true" boundary-links="true">
+</dir-pagination-controls>
